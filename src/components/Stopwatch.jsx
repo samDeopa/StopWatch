@@ -4,11 +4,11 @@ import "./Stopwatch.css";
 export default function Stopwatch() {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
-  const getTime = () => {
-    const minutes = Math.floor(time / 60)
+  const getTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60)
       .toString()
       .padStart(1, "0");
-    const seconds = String(time - minutes * 60).padStart(2, "0");
+    seconds = String(seconds % 60).padStart(2, "0");
 
     return `${minutes}:${seconds}`;
   };
@@ -17,7 +17,7 @@ export default function Stopwatch() {
     let timer;
     if (running) {
       timer = setInterval(() => {
-        setTime(time + 1);
+        setTime((prevTime) => prevTime + 1);
       }, 1000);
     } else {
       clearInterval(timer);
@@ -29,7 +29,7 @@ export default function Stopwatch() {
   return (
     <div className="watch">
       <h1>Stopwatch</h1>
-      <p>Time: {getTime()}</p>
+      <p>Time: {getTime(time)}</p>
       <div>
         <button onClick={() => setRunning(!running)}>
           {running ? "Stop" : "Start"}
