@@ -11,25 +11,27 @@ export default function Stopwatch() {
     return `${minutes}:${seconds}`;
   };
 
-  const startHandler = () => {
-    setRunning(!running);
-  };
   useEffect(() => {
+    let timer;
     if (running) {
-      const id = setInterval(() => {
+      timer = setInterval(() => {
         setTime(time + 1);
       }, 1000);
-      return () => {
-        clearInterval(id);
-      };
+    } else {
+      clearInterval(timer);
     }
+    return () => {
+      clearInterval(timer);
+    };
   }, [running, time]);
   return (
     <div className="watch">
       <h1>Stopwatch</h1>
       <p>{`Time: ${getTime()}`}</p>
       <div>
-        <button onClick={startHandler}>{running ? "Stop" : "Start"}</button>
+        <button onClick={() => setRunning(!running)}>
+          {running ? "Stop" : "Start"}
+        </button>
         <button
           onClick={() => {
             setRunning(false);
