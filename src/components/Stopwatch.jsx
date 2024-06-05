@@ -29,7 +29,7 @@ export default function Stopwatch() {
   return (
     <div className="watch">
       <h1>Stopwatch</h1>
-      <p>{`Time: ${getTime()}`}</p>
+      <p>Time: {getTime()}</p>
       <div>
         <button onClick={() => setRunning(!running)}>
           {running ? "Stop" : "Start"}
