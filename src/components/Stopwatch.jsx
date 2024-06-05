@@ -6,7 +6,8 @@ export default function Stopwatch() {
   const [running, setRunning] = useState(false);
   const getTime = () => {
     const minutes = Math.floor(time / 60);
-    const seconds = time - minutes * 60;
+    const seconds = String(time - minutes * 60).padStart(2, "0");
+
     return `${minutes}:${seconds}`;
   };
 
@@ -26,16 +27,16 @@ export default function Stopwatch() {
   return (
     <div className="watch">
       <h1>Stopwatch</h1>
-      <p>Time: {getTime()}</p>
+      <p>{`Time: ${getTime()}`}</p>
       <div>
-        <button onClick={startHandler}>start</button>
+        <button onClick={startHandler}>Start</button>
         <button
           onClick={() => {
             setRunning(false);
             setTime(0);
           }}
         >
-          reset
+          Reset
         </button>
       </div>
     </div>
