@@ -5,7 +5,9 @@ export default function Stopwatch() {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const getTime = () => {
-    const minutes = Math.floor(time / 60);
+    const minutes = Math.floor(time / 60)
+      .toString()
+      .padStart(1, "0");
     const seconds = String(time - minutes * 60).padStart(2, "0");
 
     return `${minutes}:${seconds}`;
