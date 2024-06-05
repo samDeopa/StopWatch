@@ -12,7 +12,7 @@ export default function Stopwatch() {
   };
 
   const startHandler = () => {
-    setRunning(true);
+    setRunning(!running);
   };
   useEffect(() => {
     if (running) {
@@ -29,7 +29,7 @@ export default function Stopwatch() {
       <h1>Stopwatch</h1>
       <p>{`Time: ${getTime()}`}</p>
       <div>
-        <button onClick={startHandler}>Start</button>
+        <button onClick={startHandler}>{running ? "Stop" : "Start"}</button>
         <button
           onClick={() => {
             setRunning(false);
